@@ -1,8 +1,5 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-title>
       Login
     </ion-title>
@@ -11,4 +8,54 @@
 
 <ion-content padding>
 
+  <ion-grid class="full-height" *ngIf="codePresent">
+    <ion-row class="ion-align-items-center ion-justify-content-center full-height">
+      <ion-spinner name="crescent"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card *ngIf="!codePresent">
+    <ion-card-header>
+      <ion-card-title>Welcome to Panda</ion-card-title>
+      <ion-card-subtitle>Making money management black and white</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-sm>
+            <div class="ion-text-center">
+              <ion-icon name="cash" size="large"></ion-icon>
+              <br>
+              Track your expenses
+            </div>
+          </ion-col>
+          <ion-col size="12" size-sm>
+            <div class="ion-text-center">
+              <ion-icon name="trending-up" size="large"></ion-icon>
+              <br>
+              Get insights with charts and reporting
+            </div>
+          </ion-col>
+          <ion-col size="12" size-sm>
+            <div class="ion-text-center">
+              <ion-icon name="flame" size="large"></ion-icon>
+              <br>
+              Save money by being aware of your expenses and planning accordingly
+            </div>
+          </ion-col>
+          <ion-col size="12" size-sm>
+            <div class="ion-text-center">
+              <ion-icon name="happy" size="large"></ion-icon>
+              <br>
+              Identify monetary black holes & increase happiness
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-button id="btn_login" expand="block" href='{{authenticationUrl}}'>I'm Ready - Sign Me Up</ion-button>
+      </ion-grid>
+
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

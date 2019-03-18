@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Demarcation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label>Start Date</ion-label>
+      <ion-datetime required [(ngModel)]="demarcation.startDate" (ionChange)="generateNameField()" name="startDate"
+        display-format="D MMMM YYYY" picker-format="D MMMM YYYY"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>End Date</ion-label>
+      <ion-datetime required [(ngModel)]="demarcation.endDate" (ionChange)="generateNameField()" name="endDate"
+        display-format="D MMMM YYYY" picker-format="D MMMM YYYY"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input required [(ngModel)]="demarcation.name" name="name"></ion-input>
+    </ion-item>
+  </form>
+
+
+  {{demarcation.startDate}} <br>
+  {{demarcation.endDate}} <br>
+  {{demarcation.name}}
+</ion-content>

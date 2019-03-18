@@ -13,6 +13,8 @@ const routes: Routes = [
     loadChildren: './home/home.module#HomePageModule',
     canActivate: [AuthGuard]
   },
+  { path: 'demarcations', loadChildren: './pages/demarcations/demarcations.module#DemarcationsPageModule', canActivate: [AuthGuard] },
+  { path: 'demarcations/new', loadChildren: './pages/demarcations/new/new.module#NewPageModule', canActivate: [AuthGuard] },
   {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule',
@@ -21,7 +23,9 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: './pages/login/login.module#LoginPageModule'
-  }
+  },
+  
+
 ];
 
 @NgModule({
