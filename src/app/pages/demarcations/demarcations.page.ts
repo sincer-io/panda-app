@@ -16,6 +16,7 @@ export class DemarcationsPage implements OnInit {
 
   ngOnInit() {
     this.dataSvc.demarcations.subscribe(demarcations => this.demarcations = demarcations);
+    this.getDemarcations();
   }
 
   getDemarcations() {

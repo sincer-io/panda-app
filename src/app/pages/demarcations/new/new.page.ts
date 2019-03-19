@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Demarcation } from 'src/app/models/demarcation';
+import { ApiService } from 'src/app/services/api.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-new',
@@ -10,7 +12,7 @@ export class NewPage implements OnInit {
   @Input() demarcation: Demarcation = new Demarcation();
 
 
-  constructor() { }
+  constructor(private apiSvc: ApiService, private tstCtrl: ToastController) { }
 
   ngOnInit() {
   }
@@ -32,16 +34,27 @@ export class NewPage implements OnInit {
     let start_year = start.getFullYear();
     let end_year = end.getFullYear();
 
-    if(start_month === end_month && start_year === end_year){
+    if (start_month === end_month && start_year === end_year) {
       this.demarcation.name = `${start_month} ${start_year}`;
     }
-    else if(start_month !== end_month && start_year === end_year){
+    else if (start_month !== end_month && start_year === end_year) {
       this.demarcation.name = `${start_month}/${end_month} ${start_year}`;
     }
   }
 
-  logForm() {
-    console.log(this.demarcation);
+  async logForm() {
+    this.apiSvc.postDemarcation(this.demarcation).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log('err');
+      console.log(err)
+
+      this.tstCtrl.create({
+        message: err.error,
+        duration: 2000
+      }).then(toast => toast.present());
+
+    });
   }
 
 }

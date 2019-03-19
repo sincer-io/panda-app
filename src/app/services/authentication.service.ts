@@ -40,7 +40,7 @@ export class AuthenticationService {
     url += `&redirect_uri=${b2c_redirect}`
     url += '&nonce=defaultNonce';
     url += '&scope=openid%20offline_access';
-    url += '&response_type=code';
+    url += '&response_type=code+id_token';
     url += '&prompt=login';
     url += '&response_mode=query';
 

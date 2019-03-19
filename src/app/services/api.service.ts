@@ -30,8 +30,14 @@ export class ApiService {
   }
 
   getDemarcations(): void {
+    console.log('getDemarcations');
     this.http.get<Demarcation[]>(`${this.apiUrl}demarcations`).subscribe(demarcations => {
+      console.log(demarcations);
       this.dataSvc.setDemarcations(demarcations);
     });
+  }
+
+  postDemarcation(demarcation: Demarcation): Promise<Demarcation> {
+    return this.http.post<Demarcation>(`${this.apiUrl}demarcations`, demarcation).toPromise();
   }
 }
