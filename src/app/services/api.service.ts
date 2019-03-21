@@ -5,6 +5,7 @@ import { TokenDetail } from '../models/token-detail';
 import { User } from '../models/user';
 import { DataService } from './data.service';
 import { Demarcation } from '../models/demarcation';
+import { Transaction } from '../models/transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,21 @@ export class ApiService {
     return this.http.post<TokenDetail>(`${this.apiUrl}authentication`, { url }).toPromise();
   }
 
+  getFuck() {
+    return this.http.get(`${this.apiUrl}home/fuck`).toPromise();
+  }
+
   getUser(): void {
     this.http.get<User>(`${this.apiUrl}users`).subscribe(user => {
       this.dataSvc.setUser(user);
+    });
+  }
+
+  getTransactions(): void {
+    console.log('getTransactions');
+    this.http.get<Transaction[]>(`${this.apiUrl}transactions`).subscribe(transactions => {
+      console.log(transactions);
+      this.dataSvc.setTransactions(transactions);
     });
   }
 

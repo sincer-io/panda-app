@@ -8,6 +8,30 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let demarcation of demarcations">
+      {{demarcation.name}}
+    </ion-item>
+  </ion-list>
+
+  <!-- <ion-list lines="none">
+    <ion-item *ngFor="let demarcation of demarcations">
+      <ion-card style="width: 100%;">
+        <ion-card-header>
+          <ion-card-subtitle>
+            {{demarcation.startDate.slice(0, 10)}} - {{demarcation.endDate.slice(0, 10)}}
+          </ion-card-subtitle>
+          <ion-card-title>{{demarcation.name}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          Keep close to Nature's heart... and break clear away, once in awhile,
+              and climb a mountain or spend a week in the woods. Wash your spirit clean.
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list> -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="dark" (click)="newDemarcation()">
       <ion-icon name="add"></ion-icon>

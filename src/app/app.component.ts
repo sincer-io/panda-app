@@ -17,9 +17,9 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Demarcations',
-      url: '/demarcations',
-      icon: 'clock'
+      title: 'Transactions',
+      url: '/transactions',
+      icon: 'wallet'
     },
     {
       title: 'List',

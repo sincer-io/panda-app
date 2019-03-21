@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Transaction</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input required [(ngModel)]="transaction.name" name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime required [(ngModel)]="transaction.date" name="date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Is Extraneous</ion-label>
+      <ion-toggle [(ngModel)]="transaction.isExtraneous" name="isExtraneous"></ion-toggle>
+    </ion-item>
+    <ion-button expand="full" type="submit">Save Transaction</ion-button>
+  </form>
+</ion-content>

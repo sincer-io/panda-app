@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class LoginPage implements OnInit {
   private authenticationUrl: string = '';
   private codePresent: boolean = false;
 
-  constructor(private authSvc: AuthenticationService, private apiSvc: ApiService, private route: ActivatedRoute) { }
+  constructor(private authSvc: AuthenticationService, private apiSvc: ApiService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -21,6 +21,7 @@ export class LoginPage implements OnInit {
         const code = this.authSvc.getAuthorizationEndpoint(params.code);
         this.apiSvc.authenticate(code).then(res => {
           this.authSvc.saveTokenDetail(res);
+          this.router.navigate(['/home']);
         });
       }
     });

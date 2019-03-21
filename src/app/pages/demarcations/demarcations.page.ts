@@ -15,16 +15,16 @@ export class DemarcationsPage implements OnInit {
   constructor(private apiSvc: ApiService, private navCtrl: NavController, private dataSvc: DataService) { }
 
   ngOnInit() {
-    this.dataSvc.demarcations.subscribe(demarcations => this.demarcations = demarcations);
-    this.getDemarcations();
-  }
+    this.dataSvc.demarcations.subscribe(demarcations => {
+      if(!demarcations || demarcations.length <= 0){
+        this.apiSvc.getDemarcations();
+      }
 
-  getDemarcations() {
-    this.apiSvc.getDemarcations();
+      this.demarcations = demarcations;
+    });
   }
 
   newDemarcation() {
-    console.log('nav time')
     this.navCtrl.navigateForward('demarcations/new');
   }
 

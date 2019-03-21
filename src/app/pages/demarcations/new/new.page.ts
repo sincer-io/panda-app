@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Demarcation } from 'src/app/models/demarcation';
 import { ApiService } from 'src/app/services/api.service';
 import { ToastController } from '@ionic/angular';
+import { DataService } from 'src/app/services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new',
@@ -11,11 +13,9 @@ import { ToastController } from '@ionic/angular';
 export class NewPage implements OnInit {
   @Input() demarcation: Demarcation = new Demarcation();
 
+  constructor(private apiSvc: ApiService, private tstCtrl: ToastController, private dataSvc: DataService, private router: Router) { }
 
-  constructor(private apiSvc: ApiService, private tstCtrl: ToastController) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   generateNameField() {
     let { name, startDate, endDate } = this.demarcation;
@@ -44,16 +44,13 @@ export class NewPage implements OnInit {
 
   async logForm() {
     this.apiSvc.postDemarcation(this.demarcation).then(res => {
-      console.log(res);
+      this.dataSvc.addDemarcation(res);
+      this.router.navigate(['/demarcations']);
     }).catch(err => {
-      console.log('err');
-      console.log(err)
-
       this.tstCtrl.create({
         message: err.error,
         duration: 2000
       }).then(toast => toast.present());
-
     });
   }
 
