@@ -9,18 +9,41 @@
 
 <ion-content>
   <form (ngSubmit)="logForm()">
-    <ion-item>
-      <ion-label>Name</ion-label>
-      <ion-input required [(ngModel)]="transaction.name" name="name"></ion-input>
-    </ion-item>
+
     <ion-item>
       <ion-label>Date</ion-label>
       <ion-datetime required [(ngModel)]="transaction.date" name="date"></ion-datetime>
     </ion-item>
+
+    <ion-item>
+      <ion-label>Amount</ion-label>
+      <ion-input required [(ngModel)]="transaction.amount" name="amount" type="number" placeholder="0.00"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Categories</ion-label>
+      <ionic-selectable (onChange)="categoryChange($event)" [items]="categories" itemValueField="id"
+        itemTextField="name" [canSearch]="true" [canAddItem]="true">
+      </ionic-selectable>
+    </ion-item>
+
     <ion-item>
       <ion-label>Is Extraneous</ion-label>
       <ion-toggle [(ngModel)]="transaction.isExtraneous" name="isExtraneous"></ion-toggle>
     </ion-item>
+
+    <ion-item>
+      <ion-label>Label</ion-label>
+      <ion-input [(ngModel)]="transaction.label" name="label" placeholder="Dog food"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Notes</ion-label>
+      <ion-textarea [(ngModel)]="transaction.notes" name="notes" placeholder="Any additional information">
+      </ion-textarea>
+    </ion-item>
+
+
     <ion-button expand="full" type="submit">Save Transaction</ion-button>
   </form>
 </ion-content>

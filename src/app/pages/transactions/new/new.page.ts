@@ -4,6 +4,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { ToastController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
+import { Category } from 'src/app/models/category';
+import { IonicSelectableComponent } from 'ionic-selectable';
 
 @Component({
   selector: 'app-new',
@@ -11,15 +13,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./new.page.scss'],
 })
 export class NewPage implements OnInit {
+  categories: Category[] = [{
+    id: 1,
+    name: 'Income'
+  }];
+
   @Input() transaction: Transaction = new Transaction();
 
   constructor(private apiSvc: ApiService, private tstCtrl: ToastController, private dataSvc: DataService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  logForm() {
+    console.log(this.transaction);
   }
 
-  logForm(){
-    console.log(this.transaction);
+  categoryChange(event: { component: IonicSelectableComponent, value: Category }) {
+    this.transaction.category = event.value;
   }
 
 }
