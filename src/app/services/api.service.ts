@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { DataService } from './data.service';
 import { Demarcation } from '../models/demarcation';
 import { Transaction } from '../models/transaction';
+import { Category } from '../models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,9 @@ export class ApiService {
 
   postDemarcation(demarcation: Demarcation): Promise<Demarcation> {
     return this.http.post<Demarcation>(`${this.apiUrl}demarcations`, demarcation).toPromise();
+  }
+
+  postCategory(category: Category): Promise<Category> {
+    return this.http.post<Category>(`${this.apiUrl}categories`, category).toPromise();
   }
 }

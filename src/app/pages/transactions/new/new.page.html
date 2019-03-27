@@ -23,7 +23,7 @@
     <ion-item>
       <ion-label>Categories</ion-label>
       <ionic-selectable (onChange)="categoryChange($event)" [items]="categories" itemValueField="id"
-        itemTextField="name" [canSearch]="true" [canAddItem]="true">
+        itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddCategory($event)">
       </ionic-selectable>
     </ion-item>
 
