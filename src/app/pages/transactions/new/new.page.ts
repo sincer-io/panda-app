@@ -6,6 +6,9 @@ import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { IonicSelectableComponent } from 'ionic-selectable';
+import { Tag } from 'src/app/models/tag';
+import { Person } from 'src/app/models/person';
+import { Location } from 'src/app/models/location';
 
 @Component({
   selector: 'app-new',
@@ -17,6 +20,10 @@ export class NewPage implements OnInit {
     id: 1,
     name: 'Income'
   }];
+  locations: Location[] = [];
+  tags: Tag[] = [];
+  people: Person[] = []
+
 
   @Input() transaction: Transaction = new Transaction();
 
@@ -32,19 +39,75 @@ export class NewPage implements OnInit {
     this.transaction.category = event.value;
   }
 
+  locationChange(event: { component: IonicSelectableComponent, value: Location }) {
+    this.transaction.location = event.value;
+  }
+
   /**
    * Handles addition of a new category
    * @param event Selectable Event
    */
   onAddCategory(event: { component: IonicSelectableComponent }) {
+    this.newValuePrompt("Category", "Groceries", event.component.searchText, (e) => {
+      event.component.showLoading();
+      let newCategory: Category = {
+        id: 0,
+        name: e.textValue
+      }
+
+      this.apiSvc.postCategory(newCategory).then(res => {
+        event.component.search(res.name);
+        this.categories.push(res);
+      }).catch(err => {
+        this.tstCtrl.create({
+          message: err.error,
+          duration: 2000
+        }).then(toast => toast.present());
+      }).finally(() => {
+        event.component.hideLoading();
+      });
+    });
+  }
+
+  onAddLocation(event: { component: IonicSelectableComponent }) {
+    this.newValuePrompt("Location", "69 Backend Alley", event.component.searchText, (e) => {
+      event.component.showLoading();
+      let newLocation: Location = {
+        id: 0,
+        name: e.textValue
+      }
+
+      this.apiSvc.postLocation(newLocation).then(res => {
+        event.component.search(res.name);
+        this.locations.push(res);
+      }).catch(err => {
+        this.tstCtrl.create({
+          message: err.error,
+          duration: 2000
+        }).then(toast => toast.present());
+      }).finally(() => {
+        event.component.hideLoading();
+      });
+    });
+  }
+
+  onAddTag(event: { component: IonicSelectableComponent }) {
+    console.log(event);
+  }
+
+  onAddPerson(event: { component: IonicSelectableComponent }) {
+    console.log(event);
+  }
+
+  private newValuePrompt(modelName: string, placeholder: string, searchText: string, callback) {
     this.alertCtr.create({
-      header: 'New Category',
+      header: `New ${modelName}`,
       inputs: [
         {
-          name: 'categoryName',
+          name: 'textValue',
           type: 'text',
-          placeholder: 'Groceries',
-          value: event.component.searchText
+          placeholder: placeholder,
+          value: searchText
         },
       ],
       buttons: [
@@ -57,25 +120,7 @@ export class NewPage implements OnInit {
           }
         }, {
           text: 'Ok',
-          handler: (e) => {
-            event.component.showLoading();
-            let newCategory: Category = {
-              id: 0,
-              name: e.categoryName
-            }
-
-            this.apiSvc.postCategory(newCategory).then(res => {
-              this.categories.push(res);
-              event.component.search(res.name);
-            }).catch(err => {
-              this.tstCtrl.create({
-                message: err.error,
-                duration: 2000
-              }).then(toast => toast.present());
-            }).finally(() => {
-              event.component.hideLoading();
-            });
-          }
+          handler: callback
         }
       ]
     }).then(alert => alert.present());

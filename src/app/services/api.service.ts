@@ -7,6 +7,7 @@ import { DataService } from './data.service';
 import { Demarcation } from '../models/demarcation';
 import { Transaction } from '../models/transaction';
 import { Category } from '../models/category';
+import { Location } from '../models/location';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +58,9 @@ export class ApiService {
 
   postCategory(category: Category): Promise<Category> {
     return this.http.post<Category>(`${this.apiUrl}categories`, category).toPromise();
+  }
+
+  postLocation(location: Location): Promise<Location> {
+    return this.http.post<Location>(`${this.apiUrl}categories`, location).toPromise();
   }
 }

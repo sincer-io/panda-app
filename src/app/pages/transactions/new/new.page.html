@@ -21,9 +21,30 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Categories</ion-label>
+      <ion-label>Category</ion-label>
       <ionic-selectable (onChange)="categoryChange($event)" [items]="categories" itemValueField="id"
         itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddCategory($event)">
+      </ionic-selectable>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Location</ion-label>
+      <ionic-selectable (onChange)="locationChange($event)" [items]="locations" itemValueField="id"
+        itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddLocation($event)">
+      </ionic-selectable>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tags</ion-label>
+      <ionic-selectable (onChange)="tagsChange($event)" [items]="tags" itemValueField="id"
+        itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddTag($event)">
+      </ionic-selectable>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>People</ion-label>
+      <ionic-selectable (onChange)="peopleChange($event)" [items]="people" itemValueField="id"
+        itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddPerson($event)">
       </ionic-selectable>
     </ion-item>
 
