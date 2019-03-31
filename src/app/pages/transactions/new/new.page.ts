@@ -33,6 +33,17 @@ export class NewPage implements OnInit {
 
   logForm() {
     console.log(this.transaction);
+
+    this.apiSvc.postTransaction(this.transaction).then(res => {
+      console.log(res);
+      // event.component.search(res.name);
+      // this.tags.push(res);
+    }).catch(err => {
+      this.tstCtrl.create({
+        message: err.error,
+        duration: 2000
+      }).then(toast => toast.present());
+    });
   }
 
   categoryChange(event: { component: IonicSelectableComponent, value: Category }) {
@@ -41,6 +52,14 @@ export class NewPage implements OnInit {
 
   locationChange(event: { component: IonicSelectableComponent, value: Location }) {
     this.transaction.location = event.value;
+  }
+
+  tagsChange(event: { component: IonicSelectableComponent, value: Tag[] }) {
+    this.transaction.tags = event.value;
+  }
+
+  peopleChange(event: { component: IonicSelectableComponent, value: Person[] }) {
+    this.transaction.people = event.value;
   }
 
   /**
@@ -92,11 +111,47 @@ export class NewPage implements OnInit {
   }
 
   onAddTag(event: { component: IonicSelectableComponent }) {
-    console.log(event);
+    this.newValuePrompt("Tag", "Birthday", event.component.searchText, (e) => {
+      event.component.showLoading();
+      let newTag: Tag = {
+        id: 0,
+        name: e.textValue
+      }
+
+      this.apiSvc.postTag(newTag).then(res => {
+        event.component.search(res.name);
+        this.tags.push(res);
+      }).catch(err => {
+        this.tstCtrl.create({
+          message: err.error,
+          duration: 2000
+        }).then(toast => toast.present());
+      }).finally(() => {
+        event.component.hideLoading();
+      });
+    });
   }
 
   onAddPerson(event: { component: IonicSelectableComponent }) {
-    console.log(event);
+    this.newValuePrompt("Person", "Jacob Fire", event.component.searchText, (e) => {
+      event.component.showLoading();
+      let newPerson: Person = {
+        id: 0,
+        name: e.textValue
+      }
+
+      this.apiSvc.postPerson(newPerson).then(res => {
+        event.component.search(res.name);
+        this.people.push(res);
+      }).catch(err => {
+        this.tstCtrl.create({
+          message: err.error,
+          duration: 2000
+        }).then(toast => toast.present());
+      }).finally(() => {
+        event.component.hideLoading();
+      });
+    });
   }
 
   private newValuePrompt(modelName: string, placeholder: string, searchText: string, callback) {

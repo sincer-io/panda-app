@@ -37,14 +37,14 @@
     <ion-item>
       <ion-label>Tags</ion-label>
       <ionic-selectable (onChange)="tagsChange($event)" [items]="tags" itemValueField="id"
-        itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddTag($event)">
+        itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddTag($event)" [isMultiple]="true">
       </ionic-selectable>
     </ion-item>
 
     <ion-item>
       <ion-label>People</ion-label>
       <ionic-selectable (onChange)="peopleChange($event)" [items]="people" itemValueField="id"
-        itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddPerson($event)">
+        itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddPerson($event)" [isMultiple]="true">
       </ionic-selectable>
     </ion-item>
 

@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { NavController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { Transaction } from 'src/app/models/transaction';
+import { GroupedTransactions } from 'src/app/models/grouped-transactions';
 
 @Component({
   selector: 'app-transactions',
@@ -10,17 +11,17 @@ import { Transaction } from 'src/app/models/transaction';
   styleUrls: ['./transactions.page.scss'],
 })
 export class TransactionsPage implements OnInit {
-  private transactions: Transaction[];
+  private groupedTransactions: GroupedTransactions[];
 
   constructor(private apiSvc: ApiService, private navCtrl: NavController, private dataSvc: DataService) { }
 
   ngOnInit() {
-    this.dataSvc.transactions.subscribe(transactions => {
-      if (!this.transactions) {
+    this.dataSvc.transactions.subscribe(groupedTransactions => {
+      if (!this.groupedTransactions) {
         this.apiSvc.getTransactions();
       }
 
-      this.transactions = transactions;
+      this.groupedTransactions = groupedTransactions;
     });
   }
 

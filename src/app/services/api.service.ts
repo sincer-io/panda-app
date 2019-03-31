@@ -8,6 +8,9 @@ import { Demarcation } from '../models/demarcation';
 import { Transaction } from '../models/transaction';
 import { Category } from '../models/category';
 import { Location } from '../models/location';
+import { Tag } from '../models/tag';
+import { Person } from '../models/person';
+import { GroupedTransactions } from '../models/grouped-transactions';
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +39,13 @@ export class ApiService {
     });
   }
 
+  postTransaction(transaction: Transaction): Promise<Transaction> {
+    return this.http.post<Transaction>(`${this.apiUrl}transactions`, transaction).toPromise();
+  }
+
   getTransactions(): void {
     console.log('getTransactions');
-    this.http.get<Transaction[]>(`${this.apiUrl}transactions`).subscribe(transactions => {
+    this.http.get<GroupedTransactions[]>(`${this.apiUrl}transactions`).subscribe(transactions => {
       console.log(transactions);
       this.dataSvc.setTransactions(transactions);
     });
@@ -61,6 +68,14 @@ export class ApiService {
   }
 
   postLocation(location: Location): Promise<Location> {
-    return this.http.post<Location>(`${this.apiUrl}categories`, location).toPromise();
+    return this.http.post<Location>(`${this.apiUrl}locations`, location).toPromise();
+  }
+
+  postTag(tag: Tag): Promise<Tag> {
+    return this.http.post<Tag>(`${this.apiUrl}tags`, tag).toPromise();
+  }
+
+  postPerson(person: Person): Promise<Person> {
+    return this.http.post<Person>(`${this.apiUrl}people`, person).toPromise();
   }
 }
