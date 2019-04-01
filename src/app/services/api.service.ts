@@ -10,7 +10,6 @@ import { Category } from '../models/category';
 import { Location } from '../models/location';
 import { Tag } from '../models/tag';
 import { Person } from '../models/person';
-import { GroupedTransactions } from '../models/grouped-transactions';
 
 @Injectable({
   providedIn: 'root'
@@ -44,9 +43,7 @@ export class ApiService {
   }
 
   getTransactions(): void {
-    console.log('getTransactions');
-    this.http.get<GroupedTransactions[]>(`${this.apiUrl}transactions`).subscribe(transactions => {
-      console.log(transactions);
+    this.http.get<Transaction[]>(`${this.apiUrl}transactions`).subscribe(transactions => {
       this.dataSvc.setTransactions(transactions);
     });
   }
@@ -61,6 +58,12 @@ export class ApiService {
 
   postDemarcation(demarcation: Demarcation): Promise<Demarcation> {
     return this.http.post<Demarcation>(`${this.apiUrl}demarcations`, demarcation).toPromise();
+  }
+
+  getCategories(): void{
+    this.http.get<Category[]>(`${this.apiUrl}categories`).subscribe(categories => {
+      this.dataSvc.setCategories(categories);
+    });
   }
 
   postCategory(category: Category): Promise<Category> {

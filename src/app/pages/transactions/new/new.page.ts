@@ -29,7 +29,16 @@ export class NewPage implements OnInit {
 
   constructor(private apiSvc: ApiService, private tstCtrl: ToastController, private dataSvc: DataService, private router: Router, public alertCtr: AlertController) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.dataSvc.categories.subscribe(categories => {
+      let cats = categories.filter(x => x.name !== 'Income');
+      this.categories = [...this.categories, ...cats];
+    });
+
+    if (this.categories.length <= 1) {
+      this.apiSvc.getCategories();
+    }
+  }
 
   logForm() {
     console.log(this.transaction);

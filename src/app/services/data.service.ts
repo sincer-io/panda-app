@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Demarcation } from '../models/demarcation';
 import { User } from '../models/user';
 import { Transaction } from '../models/transaction';
-import { GroupedTransactions } from '../models/grouped-transactions';
+import { Category } from '../models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,11 @@ export class DataService {
   private demarcationsSource = new BehaviorSubject<Demarcation[]>([]);
   demarcations: Observable<Demarcation[]> = this.demarcationsSource.asObservable();
 
-  private transactionsSource = new BehaviorSubject<GroupedTransactions[]>([]);
-  transactions: Observable<GroupedTransactions[]> = this.transactionsSource.asObservable();
+  private transactionsSource = new BehaviorSubject<Transaction[]>([]);
+  transactions: Observable<Transaction[]> = this.transactionsSource.asObservable();
+
+  private categoriesSource = new BehaviorSubject<Category[]>([]);
+  categories: Observable<Category[]> = this.categoriesSource.asObservable();
 
   constructor() { }
 
@@ -24,8 +27,12 @@ export class DataService {
     this.userSource.next(user);
   }
 
-  setTransactions(transactions: GroupedTransactions[]) {
+  setTransactions(transactions: Transaction[]) {
     this.transactionsSource.next(transactions);
+  }
+
+  setCategories(categories: Category[]) {
+    this.categoriesSource.next(categories);
   }
 
   setDemarcations(demarcations: Demarcation[]) {

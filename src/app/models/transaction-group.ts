@@ -1,5 +1,6 @@
 import { Transaction } from './transaction';
 
-export class GroupedTransactions {
+export class TransactionGroup {
+    date: string;
     transactions: Transaction[];
 }

@@ -17,6 +17,13 @@ export class HomePage implements OnInit {
     }).catch(err => {
       console.log(err);
     })
+
+    this.apiSvc.getCategories().then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 }
   
