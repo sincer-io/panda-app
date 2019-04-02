@@ -9,6 +9,36 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  hello
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Current Balance</ion-card-subtitle>
+      <ion-card-title>{{ balance }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Last 30 Days</ion-card-subtitle>
+      <ion-card-title>Burndown</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-row class="ion-justify-content-center" *ngIf="!burndownEntries || !burndownEntries.length">
+        <ion-col size="auto">
+          <div>
+            <ion-spinner></ion-spinner>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <div style="position: relative; height:100%; width:100%;">
+        <canvas id="canvas-chart"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+
 </ion-content>

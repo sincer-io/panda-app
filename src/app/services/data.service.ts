@@ -4,6 +4,7 @@ import { Demarcation } from '../models/demarcation';
 import { User } from '../models/user';
 import { Transaction } from '../models/transaction';
 import { Category } from '../models/category';
+import { BurndownEntry } from '../models/burndown-entry';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,12 @@ export class DataService {
 
   private categoriesSource = new BehaviorSubject<Category[]>([]);
   categories: Observable<Category[]> = this.categoriesSource.asObservable();
+
+  private balanceSource = new BehaviorSubject<number>(null);
+  balance: Observable<number> = this.balanceSource.asObservable();
+
+  private burndownEntriesSource = new BehaviorSubject<BurndownEntry[]>([]);
+  burndownEntries: Observable<BurndownEntry[]> = this.burndownEntriesSource.asObservable();
 
   constructor() { }
 
@@ -39,10 +46,18 @@ export class DataService {
     this.demarcationsSource.next(demarcations);
   }
 
-  addDemarcation(demarcation: Demarcation){
+  addDemarcation(demarcation: Demarcation) {
     let newDemarcationList = this.demarcationsSource.value;
     newDemarcationList.push(demarcation);
     this.setDemarcations(newDemarcationList);
+  }
+
+  setBurndownEntries(burndownEntries: BurndownEntry[]) {
+    this.burndownEntriesSource.next(burndownEntries);
+  }
+
+  setBalance(balance: number) {
+    this.balanceSource.next(balance);
   }
 
 }

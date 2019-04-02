@@ -10,6 +10,7 @@ import { Category } from '../models/category';
 import { Location } from '../models/location';
 import { Tag } from '../models/tag';
 import { Person } from '../models/person';
+import { BurndownEntry } from '../models/burndown-entry';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +61,7 @@ export class ApiService {
     return this.http.post<Demarcation>(`${this.apiUrl}demarcations`, demarcation).toPromise();
   }
 
-  getCategories(): void{
+  getCategories(): void {
     this.http.get<Category[]>(`${this.apiUrl}categories`).subscribe(categories => {
       this.dataSvc.setCategories(categories);
     });
@@ -80,5 +81,17 @@ export class ApiService {
 
   postPerson(person: Person): Promise<Person> {
     return this.http.post<Person>(`${this.apiUrl}people`, person).toPromise();
+  }
+
+  getBalance() {
+    this.http.get<number>(`${this.apiUrl}reports/balance`).subscribe(balance => {
+      this.dataSvc.setBalance(balance);
+    });
+  }
+
+  getBurndownEntries() {
+    this.http.get<BurndownEntry[]>(`${this.apiUrl}reports/burndown`).subscribe(entries => {
+      this.dataSvc.setBurndownEntries(entries);
+    });
   }
 }
