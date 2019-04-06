@@ -20,31 +20,33 @@
       <ion-input required [(ngModel)]="transaction.amount" name="amount" type="number" placeholder="0.00"></ion-input>
     </ion-item>
 
+    <!-- (onChange)="categoryChange($event)"  -->
+
     <ion-item>
       <ion-label>Category</ion-label>
-      <ionic-selectable (onChange)="categoryChange($event)" [items]="categories" itemValueField="id"
+      <ionic-selectable name="category" [(ngModel)]="transaction.category" [items]="categories" itemValueField="id"
         itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddCategory($event)">
       </ionic-selectable>
     </ion-item>
 
     <ion-item>
       <ion-label>Location</ion-label>
-      <ionic-selectable (onChange)="locationChange($event)" [items]="locations" itemValueField="id"
+      <ionic-selectable name="location" [(ngModel)]="transaction.location" [items]="locations" itemValueField="id"
         itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddLocation($event)">
       </ionic-selectable>
     </ion-item>
 
     <ion-item>
       <ion-label>Tags</ion-label>
-      <ionic-selectable (onChange)="tagsChange($event)" [items]="tags" itemValueField="id"
-        itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddTag($event)" [isMultiple]="true">
+      <ionic-selectable name="tags" [(ngModel)]="transaction.tags" [items]="tags" itemValueField="id" itemTextField="name"
+        [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddTag($event)" [isMultiple]="true">
       </ionic-selectable>
     </ion-item>
 
     <ion-item>
       <ion-label>People</ion-label>
-      <ionic-selectable (onChange)="peopleChange($event)" [items]="people" itemValueField="id"
-        itemTextField="name" [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddPerson($event)" [isMultiple]="true">
+      <ionic-selectable name="people" [(ngModel)]="transaction.people" [items]="people" itemValueField="id" itemTextField="name"
+        [canSearch]="true" [canAddItem]="true" (onAddItem)="onAddPerson($event)" [isMultiple]="true">
       </ionic-selectable>
     </ion-item>
 

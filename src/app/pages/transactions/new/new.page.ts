@@ -47,7 +47,7 @@ export class NewPage implements OnInit {
     if (this.tags.length <= 1) {
       this.apiSvc.getTags();
     }
-    
+
     this.dataSvc.people.subscribe(people => this.people = people);
     if (this.people.length <= 1) {
       this.apiSvc.getPeople();
@@ -61,32 +61,37 @@ export class NewPage implements OnInit {
       console.log(res);
       if (res.id) {
         this.dataSvc.addTransaction(res);
-        this.navCtrl.navigateForward('transactions');
+
+        this.transaction.amount = null;
+        this.transaction.category = null;
+        this.transaction.location = null;
+        this.transaction.tags = null;
+        this.transaction.people = null;
+        this.transaction.isExtraneous = false;
+        this.transaction.label = null;
+        this.transaction.notes = null;
+
+        this.tstCtrl.create({
+          message: "Transaction Added",
+          duration: 2000,
+          showCloseButton: true,
+          closeButtonText: "View Transactions",
+          keyboardClose: true,
+        }).then(toast => {
+          toast.present();
+          toast.onDidDismiss().then((e) => {
+            if (e.role == 'cancel') {
+              this.navCtrl.navigateForward('transactions');
+            }
+          })
+        });
       }
-      // event.component.search(res.name);
-      // this.tags.push(res);
     }).catch(err => {
       this.tstCtrl.create({
         message: err.error,
         duration: 2000
       }).then(toast => toast.present());
     });
-  }
-
-  categoryChange(event: { component: IonicSelectableComponent, value: Category }) {
-    this.transaction.category = event.value;
-  }
-
-  locationChange(event: { component: IonicSelectableComponent, value: Location }) {
-    this.transaction.location = event.value;
-  }
-
-  tagsChange(event: { component: IonicSelectableComponent, value: Tag[] }) {
-    this.transaction.tags = event.value;
-  }
-
-  peopleChange(event: { component: IonicSelectableComponent, value: Person[] }) {
-    this.transaction.people = event.value;
   }
 
   /**

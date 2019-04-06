@@ -14,13 +14,13 @@
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Current Balance</ion-card-subtitle>
-      <ion-card-title>{{ balance }}</ion-card-title>
+      <ion-card-title>{{ balance ? balance.toFixed(2) : 'Loading' }}</ion-card-title>
     </ion-card-header>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>Last 30 Days</ion-card-subtitle>
+      <ion-card-subtitle>Lotsa</ion-card-subtitle>
       <ion-card-title>Burndown</ion-card-title>
     </ion-card-header>
 
