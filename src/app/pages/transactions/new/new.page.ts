@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Transaction } from 'src/app/models/transaction';
 import { ApiService } from 'src/app/services/api.service';
-import { ToastController, AlertController } from '@ionic/angular';
+import { ToastController, AlertController, NavController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
@@ -27,16 +27,30 @@ export class NewPage implements OnInit {
 
   @Input() transaction: Transaction = new Transaction();
 
-  constructor(private apiSvc: ApiService, private tstCtrl: ToastController, private dataSvc: DataService, private router: Router, public alertCtr: AlertController) { }
+  constructor(private apiSvc: ApiService, private navCtrl: NavController, private tstCtrl: ToastController, private dataSvc: DataService, private router: Router, public alertCtr: AlertController) { }
 
   ngOnInit() {
     this.dataSvc.categories.subscribe(categories => {
       let cats = categories.filter(x => x.name !== 'Income');
       this.categories = [...this.categories, ...cats];
     });
-
     if (this.categories.length <= 1) {
       this.apiSvc.getCategories();
+    }
+
+    this.dataSvc.locations.subscribe(locations => this.locations = locations);
+    if (this.locations.length <= 1) {
+      this.apiSvc.getLocations();
+    }
+
+    this.dataSvc.tags.subscribe(tags => this.tags = tags);
+    if (this.tags.length <= 1) {
+      this.apiSvc.getTags();
+    }
+    
+    this.dataSvc.people.subscribe(people => this.people = people);
+    if (this.people.length <= 1) {
+      this.apiSvc.getPeople();
     }
   }
 
@@ -45,6 +59,10 @@ export class NewPage implements OnInit {
 
     this.apiSvc.postTransaction(this.transaction).then(res => {
       console.log(res);
+      if (res.id) {
+        this.dataSvc.addTransaction(res);
+        this.navCtrl.navigateForward('transactions');
+      }
       // event.component.search(res.name);
       // this.tags.push(res);
     }).catch(err => {

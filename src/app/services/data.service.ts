@@ -4,7 +4,10 @@ import { Demarcation } from '../models/demarcation';
 import { User } from '../models/user';
 import { Transaction } from '../models/transaction';
 import { Category } from '../models/category';
+import { Location } from '../models/location';
 import { BurndownEntry } from '../models/burndown-entry';
+import { Tag } from '../models/tag';
+import { Person } from '../models/person';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +25,15 @@ export class DataService {
   private categoriesSource = new BehaviorSubject<Category[]>([]);
   categories: Observable<Category[]> = this.categoriesSource.asObservable();
 
+  private locationsSource = new BehaviorSubject<Location[]>([]);
+  locations: Observable<Location[]> = this.locationsSource.asObservable();
+
+  private tagsSource = new BehaviorSubject<Tag[]>([]);
+  tags: Observable<Tag[]> = this.tagsSource.asObservable();
+
+  private peopleSource = new BehaviorSubject<Person[]>([]);
+  people: Observable<Person[]> = this.peopleSource.asObservable();
+
   private balanceSource = new BehaviorSubject<number>(null);
   balance: Observable<number> = this.balanceSource.asObservable();
 
@@ -36,6 +48,13 @@ export class DataService {
 
   setTransactions(transactions: Transaction[]) {
     this.transactionsSource.next(transactions);
+  }
+
+  addTransaction(transaction: Transaction){
+    let transactions = [...this.transactionsSource.value, transaction].sort((x, y) => y.date.localeCompare(x.date));
+    if(transactions.length > 1){
+      this.transactionsSource.next(transactions);
+    }
   }
 
   setCategories(categories: Category[]) {
@@ -60,4 +79,16 @@ export class DataService {
     this.balanceSource.next(balance);
   }
 
+  setLocations(locations: Location[]) {
+    this.locationsSource.next(locations);
+  }
+
+  setTags(tags: Tag[]) {
+    this.tagsSource.next(tags);
+  }
+
+  setPeople(people: Person[]) {
+    this.peopleSource.next(people);
+  }
+  
 }

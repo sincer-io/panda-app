@@ -29,10 +29,6 @@ export class ApiService {
     return this.http.post<TokenDetail>(`${this.apiUrl}authentication`, { url }).toPromise();
   }
 
-  getFuck() {
-    return this.http.get(`${this.apiUrl}home/fuck`).toPromise();
-  }
-
   getUser(): void {
     this.http.get<User>(`${this.apiUrl}users`).subscribe(user => {
       this.dataSvc.setUser(user);
@@ -71,6 +67,12 @@ export class ApiService {
     return this.http.post<Category>(`${this.apiUrl}categories`, category).toPromise();
   }
 
+  getLocations(): void {
+    this.http.get<Location[]>(`${this.apiUrl}locations`).subscribe(locations => {
+      this.dataSvc.setLocations(locations.filter(x => x !== null));
+    });
+  }
+
   postLocation(location: Location): Promise<Location> {
     return this.http.post<Location>(`${this.apiUrl}locations`, location).toPromise();
   }
@@ -79,8 +81,21 @@ export class ApiService {
     return this.http.post<Tag>(`${this.apiUrl}tags`, tag).toPromise();
   }
 
+  getTags(): void {
+    this.http.get<Tag[]>(`${this.apiUrl}tags`).subscribe(tags => {
+      console.log('tags', tags);
+      this.dataSvc.setTags(tags.filter(x => x !== null));
+    });
+  }
+
   postPerson(person: Person): Promise<Person> {
     return this.http.post<Person>(`${this.apiUrl}people`, person).toPromise();
+  }
+
+  getPeople(): void {
+    this.http.get<Person[]>(`${this.apiUrl}people`).subscribe(people => {
+      this.dataSvc.setPeople(people.filter(x => x !== null));
+    });
   }
 
   getBalance() {

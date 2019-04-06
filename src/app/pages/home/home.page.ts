@@ -54,6 +54,7 @@ export class HomePage implements OnInit {
       data: {
         labels: this.burndownEntries.map(e => e.date),
         datasets: [{
+          steppedLine: true,
           backgroundColor: [
             'rgba(0, 0, 0, 0.1)',
           ],
