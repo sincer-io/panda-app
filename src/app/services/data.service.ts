@@ -57,6 +57,11 @@ export class DataService {
     }
   }
 
+  removeTransaction(transactionId: number){
+    let transactions = this.transactionsSource.value.filter(x => x.id !== transactionId);
+    this.transactionsSource.next(transactions);
+  }
+
   setCategories(categories: Category[]) {
     this.categoriesSource.next(categories);
   }

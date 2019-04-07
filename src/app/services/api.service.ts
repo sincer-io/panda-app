@@ -39,6 +39,10 @@ export class ApiService {
     return this.http.post<Transaction>(`${this.apiUrl}transactions`, transaction).toPromise();
   }
 
+  deleteTransaction(transactionId: number): Promise<any> {
+    return this.http.delete(`${this.apiUrl}transactions/${transactionId}`).toPromise();
+  }
+
   getTransactions(): void {
     this.http.get<Transaction[]>(`${this.apiUrl}transactions`).subscribe(transactions => {
       this.dataSvc.setTransactions(transactions);
