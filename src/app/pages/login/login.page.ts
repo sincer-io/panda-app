@@ -9,8 +9,8 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  private authenticationUrl: string = '';
-  private codePresent: boolean = false;
+  authenticationUrl: string = '';
+  codePresent: boolean = false;
 
   constructor(private authSvc: AuthenticationService, private apiSvc: ApiService, private route: ActivatedRoute, private router: Router) { }
 

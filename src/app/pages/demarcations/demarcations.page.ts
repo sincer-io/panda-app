@@ -10,7 +10,7 @@ import { Demarcation } from 'src/app/models/demarcation';
   styleUrls: ['./demarcations.page.scss'],
 })
 export class DemarcationsPage implements OnInit {
-  private demarcations: Demarcation[];
+  demarcations: Demarcation[];
 
   constructor(private apiSvc: ApiService, private navCtrl: NavController, private dataSvc: DataService) { }
 

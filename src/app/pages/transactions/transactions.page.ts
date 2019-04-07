@@ -11,7 +11,7 @@ import { TransactionGroup } from 'src/app/models/transaction-group';
   styleUrls: ['./transactions.page.scss'],
 })
 export class TransactionsPage implements OnInit {
-  private groupedTransactions: TransactionGroup[] = [];
+  groupedTransactions: TransactionGroup[] = [];
   private transactions: Transaction[];
 
   constructor(private apiSvc: ApiService, private navCtrl: NavController, private dataSvc: DataService) { }
