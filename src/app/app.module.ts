@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './guards/auth.guard';
 import { AddBearerInterceptor } from './interceptors/add-bearer-interceptor';
 import { FormsModule } from '@angular/forms';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     IonicSelectableModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     StatusBar,
