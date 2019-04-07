@@ -47,6 +47,10 @@ export class TransactionsPage implements OnInit {
     this.navCtrl.navigateForward('transactions/new');
   }
 
+  viewTransaction(transactionId: number){
+    this.navCtrl.navigateForward(`transactions/${transactionId}`);
+  }
+
   deleteTransaction(transactionId: number) {
     console.log(transactionId);
     this.alertCtr.create({

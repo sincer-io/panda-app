@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NewPage } from './new.page';
+import { TransactionPage } from './transaction.page';
 import { IonicSelectableModule } from 'ionic-selectable';
 
 const routes: Routes = [
   {
     path: '',
-    component: NewPage
+    component: TransactionPage
   }
 ];
 
@@ -23,6 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     IonicSelectableModule
   ],
-  declarations: [NewPage]
+  declarations: [TransactionPage]
 })
-export class NewPageModule {}
+export class TransactionPageModule {}

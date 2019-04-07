@@ -3,12 +3,12 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>New Transaction</ion-title>
+    <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="logForm()">
+  <form (ngSubmit)="submitForm()">
 
     <ion-item>
       <ion-label>Date</ion-label>
@@ -67,6 +67,6 @@
     </ion-item>
 
 
-    <ion-button expand="full" type="submit">Save Transaction</ion-button>
+    <ion-button expand="full" type="submit">{{ buttonLabel }}</ion-button>
   </form>
 </ion-content>

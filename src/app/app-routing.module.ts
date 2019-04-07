@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -27,9 +27,19 @@ const routes: Routes = [
     loadChildren: './pages/transactions/transactions.module#TransactionsPageModule',
     canActivate: [AuthGuard]
   },
+  // {
+  //   path: 'transactions/new',
+  //   loadChildren: './pages/transactions/new/new.module#NewPageModule',
+  //   canActivate: [AuthGuard]
+  // },
   {
-    path: 'transactions/new',
-    loadChildren: './pages/transactions/new/new.module#NewPageModule',
+    path: 'transactions/new', 
+    loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'transactions/:id', 
+    loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
     canActivate: [AuthGuard]
   },
 

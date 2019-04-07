@@ -14,7 +14,7 @@
         <ion-label>{{ group.date }}</ion-label>
       </ion-list-header>
       <ion-item-sliding *ngFor="let transaction of group.transactions">
-        <ion-item>
+        <ion-item (click)="viewTransaction(transaction.id)">
           {{ transaction.label || ( transaction.category ? transaction.category.name : null ) }}
           <div class="item-note" slot="end">
             <ion-text *ngIf="transaction.amount < 0" color="danger">
