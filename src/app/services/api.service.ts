@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { TokenDetail } from '../models/token-detail';
 import { User } from '../models/user';
 import { DataService } from './data.service';
-import { Demarcation } from '../models/demarcation';
 import { Transaction } from '../models/transaction';
 import { Category } from '../models/category';
 import { Location } from '../models/location';
@@ -47,18 +46,6 @@ export class ApiService {
     this.http.get<Transaction[]>(`${this.apiUrl}transactions`).subscribe(transactions => {
       this.dataSvc.setTransactions(transactions);
     });
-  }
-
-  getDemarcations(): void {
-    console.log('getDemarcations');
-    this.http.get<Demarcation[]>(`${this.apiUrl}demarcations`).subscribe(demarcations => {
-      console.log(demarcations);
-      this.dataSvc.setDemarcations(demarcations);
-    });
-  }
-
-  postDemarcation(demarcation: Demarcation): Promise<Demarcation> {
-    return this.http.post<Demarcation>(`${this.apiUrl}demarcations`, demarcation).toPromise();
   }
 
   getCategories(): void {

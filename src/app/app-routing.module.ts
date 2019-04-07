@@ -13,8 +13,6 @@ const routes: Routes = [
     loadChildren: './pages/home/home.module#HomePageModule',
     canActivate: [AuthGuard]
   },
-  // { path: 'transactions', loadChildren: './pages/demarcations/demarcations.module#DemarcationsPageModule' },
-  // { path: 'demarcations/new', loadChildren: './pages/demarcations/new/new.module#NewPageModule', canActivate: [AuthGuard] },
   {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule',
