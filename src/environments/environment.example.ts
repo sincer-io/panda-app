@@ -1,5 +1,5 @@
 export const environment = {
-    production: true,
+    production: false,
     b2c_host: '',
     b2c_tenant: '',
     b2c_flow: '',

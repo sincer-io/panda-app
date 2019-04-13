@@ -2,15 +2,25 @@
 
 Panda is a money management app that focuses on giving the user data driven insights into their finances.
 
-### Getting started
+### Installing Dependencies
 
 ```bash
-# Install dependencies
 npm install
 ```
 
+### Copying environment files
+
 ```bash
-# Run app locally
+# Dev
+cp ./src/environments/environment.example.ts ./src/environments/environment.ts
+
+# Production
+cp ./src/environments/environment.example.ts ./src/environments/environment.prod.ts
+```
+
+### Run the app locally
+
+```bash
 ionic serve
 ```
 
