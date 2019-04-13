@@ -1,5 +1,7 @@
 {
   "name": "Panda",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
