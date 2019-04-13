@@ -2,6 +2,11 @@
 
 Panda is a money management app that focuses on giving the user data driven insights into their finances.
 
+## Requirements
+
+- npm
+- An Azure B2C account
+
 ### Installing Dependencies
 
 ```bash
