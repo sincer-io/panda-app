@@ -20,6 +20,31 @@ export class AppComponent {
       title: 'Transactions',
       url: '/transactions',
       icon: 'wallet'
+    },
+    {
+      title: 'Categories',
+      url: '/categories',
+      icon: 'filing'
+    },
+    {
+      title: 'Locations',
+      url: '/locations',
+      icon: 'globe'
+    },
+    {
+      title: 'People',
+      url: '/people',
+      icon: 'people'
+    },
+    {
+      title: 'Tags',
+      url: '/tags',
+      icon: 'pricetags'
+    },
+    {
+      title: 'About',
+      url: '/about',
+      icon: 'information'
     }
   ];
 

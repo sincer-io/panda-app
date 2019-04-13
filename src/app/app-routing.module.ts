@@ -23,17 +23,40 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'transactions/new', 
+    path: 'transactions/new',
     loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
     canActivate: [AuthGuard]
   },
   {
-    path: 'transactions/:id', 
+    path: 'transactions/:id',
     loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
     canActivate: [AuthGuard]
   },
-
-
+  {
+    path: 'people',
+    loadChildren: './pages/people/people.module#PeoplePageModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'categories',
+    loadChildren: './pages/categories/categories.module#CategoriesPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'locations',
+    loadChildren: './pages/locations/locations.module#LocationsPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'tags',
+    loadChildren: './pages/tags/tags.module#TagsPageModule',
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'about', 
+    loadChildren: './pages/about/about.module#AboutPageModule',
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
