@@ -14,7 +14,7 @@
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Current Balance</ion-card-subtitle>
-      <ion-card-title>{{ balance ? balance.toFixed(2) : 'Loading' }}</ion-card-title>
+      <ion-card-title>{{ balance || balance === 0 ? balance.toFixed(2) : 'Loading' }}</ion-card-title>
     </ion-card-header>
   </ion-card>
 
