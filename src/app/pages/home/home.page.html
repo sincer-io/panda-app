@@ -6,6 +6,11 @@
     <ion-title>
       Home
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="presentPopover()">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -20,13 +25,13 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>Last 30 Days</ion-card-subtitle>
+      <ion-card-subtitle>Last {{ days }} Days</ion-card-subtitle>
       <ion-card-title>Burndown</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
 
-      <ion-row class="ion-justify-content-center" *ngIf="!burndownEntries || !burndownEntries.length">
+      <ion-row class="ion-justify-content-center" *ngIf="!burndownEntries || burndownEntries.length < 0">
         <ion-col size="auto">
           <div>
             <ion-spinner></ion-spinner>

@@ -99,8 +99,8 @@ export class ApiService {
     });
   }
 
-  getBurndownEntries() {
-    this.http.get<BurndownEntry[]>(`${this.apiUrl}reports/burndown`).subscribe(entries => {
+  getBurndownEntries(days: number = 30) {
+    this.http.get<BurndownEntry[]>(`${this.apiUrl}reports/burndown?days=${days}`).subscribe(entries => {
       this.dataSvc.setBurndownEntries(entries);
     });
   }

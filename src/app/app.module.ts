@@ -15,10 +15,13 @@ import { AddBearerInterceptor } from './interceptors/add-bearer-interceptor';
 import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { TimePeriodSelectionComponent } from './components/time-period-selection/time-period-selection.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, TimePeriodSelectionComponent],
+  entryComponents: [
+    TimePeriodSelectionComponent
+  ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
