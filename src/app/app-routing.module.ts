@@ -14,11 +14,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule',
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'login',
     loadChildren: './pages/login/login.module#LoginPageModule'
   },
@@ -27,11 +22,6 @@ const routes: Routes = [
     loadChildren: './pages/transactions/transactions.module#TransactionsPageModule',
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: 'transactions/new',
-  //   loadChildren: './pages/transactions/new/new.module#NewPageModule',
-  //   canActivate: [AuthGuard]
-  // },
   {
     path: 'transactions/new', 
     loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
