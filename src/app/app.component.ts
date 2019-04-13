@@ -20,11 +20,6 @@ export class AppComponent {
       title: 'Transactions',
       url: '/transactions',
       icon: 'wallet'
-    },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
     }
   ];
 
