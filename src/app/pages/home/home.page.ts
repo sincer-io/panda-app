@@ -76,11 +76,9 @@ export class HomePage implements OnInit {
     });
   }
 
-  presentPopover(ev: any) {
+  presentPopover() {
     this.popoverCtrl.create({
-      component: TimePeriodSelectionComponent,
-      event: ev,
-      translucent: true
+      component: TimePeriodSelectionComponent
     }).then((popover) => {
       popover.present();
     });
