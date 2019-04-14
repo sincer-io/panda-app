@@ -42,6 +42,11 @@ const routes: Routes = [
     loadChildren: './pages/categories/categories.module#CategoriesPageModule',
     canActivate: [AuthGuard]
   },
+  { 
+    path: 'categories/:id', 
+    loadChildren: './pages/category/category.module#CategoryPageModule',
+    canActivate: [AuthGuard]
+  },
   {
     path: 'locations',
     loadChildren: './pages/locations/locations.module#LocationsPageModule',

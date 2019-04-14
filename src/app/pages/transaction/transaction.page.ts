@@ -3,7 +3,6 @@ import { Transaction } from 'src/app/models/transaction';
 import { ApiService } from 'src/app/services/api.service';
 import { ToastController, AlertController, NavController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
-// import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { Tag } from 'src/app/models/tag';
@@ -35,7 +34,6 @@ export class TransactionPage implements OnInit {
     private navCtrl: NavController,
     private tstCtrl: ToastController,
     private dataSvc: DataService,
-    // private router: Router,
     public alertCtr: AlertController,
     private route: ActivatedRoute
   ) { }

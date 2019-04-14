@@ -10,6 +10,7 @@ import { Location } from '../models/location';
 import { Tag } from '../models/tag';
 import { Person } from '../models/person';
 import { BurndownEntry } from '../models/burndown-entry';
+import { RelationAnalytics } from '../models/relation-analytics';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,10 @@ export class ApiService {
     this.http.get<Category[]>(`${this.apiUrl}categories`).subscribe(categories => {
       this.dataSvc.setCategories(categories);
     });
+  }
+
+  getCategoryAnalytics(id: number): Promise<RelationAnalytics> {
+    return this.http.get<RelationAnalytics>(`${this.apiUrl}categories/${id}/analytics`).toPromise();
   }
 
   postCategory(category: Category): Promise<Category> {
