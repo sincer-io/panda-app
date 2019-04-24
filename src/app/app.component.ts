@@ -41,11 +41,11 @@ export class AppComponent {
       url: '/tags',
       icon: 'pricetags'
     },
-    {
-      title: 'About',
-      url: '/about',
-      icon: 'information'
-    }
+    // {
+    //   title: 'About',
+    //   url: '/about',
+    //   icon: 'information'
+    // }
   ];
 
   constructor(

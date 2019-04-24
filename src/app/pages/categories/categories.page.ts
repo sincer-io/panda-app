@@ -10,14 +10,14 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./categories.page.scss'],
 })
 export class CategoriesPage implements OnInit {
-  private categories: Category[];
+  categories: Category[];
 
   constructor(private dataSvc: DataService, private apiSvc: ApiService, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.dataSvc.categories.subscribe(categories => {
       this.categories = categories;
-      if(!categories || categories.length <= 0){
+      if(!categories || categories.length === 0){
         this.apiSvc.getCategories();
       }
     });

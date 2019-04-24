@@ -38,12 +38,17 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'people/:id',
+    loadChildren: './pages/person/person.module#PersonPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'categories',
     loadChildren: './pages/categories/categories.module#CategoriesPageModule',
     canActivate: [AuthGuard]
   },
-  { 
-    path: 'categories/:id', 
+  {
+    path: 'categories/:id',
     loadChildren: './pages/category/category.module#CategoryPageModule',
     canActivate: [AuthGuard]
   },
@@ -53,15 +58,26 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'locations/:id',
+    loadChildren: './pages/location/location.module#LocationPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'tags',
     loadChildren: './pages/tags/tags.module#TagsPageModule',
     canActivate: [AuthGuard]
   },
-  { 
-    path: 'about', 
+  {
+    path: 'tags/:id',
+    loadChildren: './pages/tag/tag.module#TagPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'about',
     loadChildren: './pages/about/about.module#AboutPageModule',
     canActivate: [AuthGuard]
-  }
+  },
+
 ];
 
 @NgModule({

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Tag</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="full-height" *ngIf="!analytics">
+    <ion-row class="ion-align-items-center ion-justify-content-center full-height">
+      <ion-spinner name="crescent"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card *ngIf="analytics">
+    <ion-card-header>
+      <ion-card-subtitle>Total Transactions (Month)</ion-card-subtitle>
+      <ion-card-title>{{ analytics.monthTotalTransactions }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card *ngIf="analytics">
+    <ion-card-header>
+      <ion-card-subtitle>Total (Month)</ion-card-subtitle>
+      <ion-card-title>{{ analytics.monthSumOfTransactions.toFixed(2) }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card *ngIf="analytics">
+    <ion-card-header>
+      <ion-card-subtitle>Average Per Transaction (Month)</ion-card-subtitle>
+      <ion-card-title>{{ analytics.monthAveragePerTransaction.toFixed(2) }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngIf="analytics">
+    <ion-card-header>
+      <ion-card-subtitle>Total Transactions (Lifetime)</ion-card-subtitle>
+      <ion-card-title>{{ analytics.lifetimeTotalTransactions }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card *ngIf="analytics">
+    <ion-card-header>
+      <ion-card-subtitle>Total (Lifetime)</ion-card-subtitle>
+      <ion-card-title>{{ analytics.lifetimeSumOfTransactions.toFixed(2) }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card *ngIf="analytics">
+    <ion-card-header>
+      <ion-card-subtitle>Average Per Transaction (Lifetime)</ion-card-subtitle>
+      <ion-card-title>{{ analytics.lifetimeAveragePerTransaction.toFixed(2) }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

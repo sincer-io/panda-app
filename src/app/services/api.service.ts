@@ -77,6 +77,10 @@ export class ApiService {
     return this.http.post<Location>(`${this.apiUrl}locations`, location).toPromise();
   }
 
+  getLocationAnalytics(id: number): Promise<RelationAnalytics> {
+    return this.http.get<RelationAnalytics>(`${this.apiUrl}locations/${id}/analytics`).toPromise();
+  }
+
   postTag(tag: Tag): Promise<Tag> {
     return this.http.post<Tag>(`${this.apiUrl}tags`, tag).toPromise();
   }
@@ -88,6 +92,10 @@ export class ApiService {
     });
   }
 
+  getTagAnalytics(id: number): Promise<RelationAnalytics> {
+    return this.http.get<RelationAnalytics>(`${this.apiUrl}tags/${id}/analytics`).toPromise();
+  }
+
   postPerson(person: Person): Promise<Person> {
     return this.http.post<Person>(`${this.apiUrl}people`, person).toPromise();
   }
@@ -96,6 +104,10 @@ export class ApiService {
     this.http.get<Person[]>(`${this.apiUrl}people`).subscribe(people => {
       this.dataSvc.setPeople(people.filter(x => x !== null));
     });
+  }
+
+  getPersonAnalytics(id: number): Promise<RelationAnalytics> {
+    return this.http.get<RelationAnalytics>(`${this.apiUrl}people/${id}/analytics`).toPromise();
   }
 
   getBalance() {
