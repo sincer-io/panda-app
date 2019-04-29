@@ -7,6 +7,7 @@ import { Location } from '../models/location';
 import { BurndownEntry } from '../models/burndown-entry';
 import { Tag } from '../models/tag';
 import { Person } from '../models/person';
+import { PaginatedContent } from '../models/paginated-content';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,13 @@ export class DataService {
   private userSource = new BehaviorSubject<User>(null);
   user: Observable<User> = this.userSource.asObservable();
 
-  private transactionsSource = new BehaviorSubject<Transaction[]>([]);
-  transactions: Observable<Transaction[]> = this.transactionsSource.asObservable();
+  private transactionsSource = new BehaviorSubject<PaginatedContent<Transaction>>({
+    totalItems : 0,
+    totalPages : 1,
+    page: 1,
+    items: []
+  });
+  transactions: Observable<PaginatedContent<Transaction>> = this.transactionsSource.asObservable();
 
   private categoriesSource = new BehaviorSubject<Category[]>([]);
   categories: Observable<Category[]> = this.categoriesSource.asObservable();
@@ -42,20 +48,22 @@ export class DataService {
     this.userSource.next(user);
   }
 
-  setTransactions(transactions: Transaction[]) {
+  setTransactions(transactions: PaginatedContent<Transaction>) {
+    // append new transactions
+    transactions.items = [...this.transactionsSource.value.items, ...transactions.items];
     this.transactionsSource.next(transactions);
   }
 
   addTransaction(transaction: Transaction){
-    let transactions = [...this.transactionsSource.value, transaction].sort((x, y) => y.date.localeCompare(x.date));
-    if(transactions.length > 1){
-      this.transactionsSource.next(transactions);
+    let items = [...this.transactionsSource.value.items, transaction].sort((x, y) => y.date.localeCompare(x.date));
+    if(items.length > 1){
+      this.transactionsSource.next({...this.transactionsSource.value, items});
     }
   }
 
   removeTransaction(transactionId: number){
-    let transactions = this.transactionsSource.value.filter(x => x.id !== transactionId);
-    this.transactionsSource.next(transactions);
+    let items = this.transactionsSource.value.items.filter(x => x.id !== transactionId);
+    this.transactionsSource.next({...this.transactionsSource.value, items});
   }
 
   setCategories(categories: Category[]) {

@@ -71,7 +71,7 @@ export class TransactionPage implements OnInit {
         this.title = 'Transaction';
         this.buttonLabel = 'Update Transaction';
         this.dataSvc.transactions.subscribe(transactions => {
-          let transaction = transactions.find(x => x.id == params['id']);
+          let transaction = transactions.items.find(x => x.id == params['id']);
           if (transaction !== undefined) {
             this.transaction = JSON.parse(JSON.stringify(transaction));
             this.transaction.amount = this.transaction.amount < 0 ? -this.transaction.amount : this.transaction.amount;

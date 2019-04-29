@@ -11,6 +11,7 @@ import { Tag } from '../models/tag';
 import { Person } from '../models/person';
 import { BurndownEntry } from '../models/burndown-entry';
 import { RelationAnalytics } from '../models/relation-analytics';
+import { PaginatedContent } from '../models/paginated-content';
 
 @Injectable({
   providedIn: 'root'
@@ -47,9 +48,13 @@ export class ApiService {
     return this.http.put<Transaction>(`${this.apiUrl}transactions`, transaction).toPromise();
   }
 
-  getTransactions(): void {
-    this.http.get<Transaction[]>(`${this.apiUrl}transactions`).subscribe(transactions => {
-      this.dataSvc.setTransactions(transactions);
+  getTransactions(page: number = 1, per_page: number = 15): Promise<PaginatedContent<Transaction>> {
+    let params = [`page=${page}`, `perPage=${per_page}`]
+    return new Promise<PaginatedContent<Transaction>>((resolve, reject) => {
+      this.http.get<PaginatedContent<Transaction>>(`${this.apiUrl}transactions?${params.join('&')}`).subscribe(transactions => {
+        this.dataSvc.setTransactions(transactions);
+        resolve(transactions);
+      });
     });
   }
 

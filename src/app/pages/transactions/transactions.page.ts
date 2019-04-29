@@ -4,6 +4,7 @@ import { NavController, AlertController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { Transaction } from 'src/app/models/transaction';
 import { TransactionGroup } from 'src/app/models/transaction-group';
+import { PaginatedContent } from 'src/app/models/paginated-content';
 
 @Component({
   selector: 'app-transactions',
@@ -12,7 +13,7 @@ import { TransactionGroup } from 'src/app/models/transaction-group';
 })
 export class TransactionsPage implements OnInit {
   groupedTransactions: TransactionGroup[] = [];
-  private transactions: Transaction[];
+  private transactions: PaginatedContent<Transaction>;
 
   constructor(private apiSvc: ApiService, private navCtrl: NavController, private dataSvc: DataService, public alertCtr: AlertController) { }
 
@@ -23,24 +24,37 @@ export class TransactionsPage implements OnInit {
       }
 
       this.transactions = transactions;
-      this.groupedTransactions = [];
+      this.buildGroupedTransactionData();
+    });
+  }
 
-      for (let i = 0; i < this.transactions.length; i++) {
-        const element = this.transactions[i];
-        const date = element.date.substring(0, 10);
-
-        let index = this.groupedTransactions.findIndex((t) => t.date == date);
-        if (index !== -1) {
-          this.groupedTransactions[index].transactions.push(element);
-        }
-        else {
-          let trans = new TransactionGroup();
-          trans.date = date;
-          trans.transactions = [element];
-          this.groupedTransactions.push(trans);
-        }
+  paginate(event){
+    this.apiSvc.getTransactions(this.transactions.page + 1).then(res => {
+      event.target.complete();
+      if(res.page >= res.totalPages){
+        event.target.disabled = true;
       }
     });
+  }
+
+  buildGroupedTransactionData(){
+    for (let i = 0; i < this.transactions.items.length; i++) {
+      const element = this.transactions.items[i];
+      const date = element.date.substring(0, 10);
+
+      let index = this.groupedTransactions.findIndex((t) => t.date == date);
+      if (index !== -1) {
+        if(this.groupedTransactions[index].transactions.findIndex((t) => t.id == element.id) === -1){
+          this.groupedTransactions[index].transactions.push(element);
+        }
+      }
+      else {
+        let trans = new TransactionGroup();
+        trans.date = date;
+        trans.transactions = [element];
+        this.groupedTransactions.push(trans);
+      }
+    }
   }
 
   newTransaction() {
