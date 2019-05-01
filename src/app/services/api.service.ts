@@ -126,4 +126,9 @@ export class ApiService {
       this.dataSvc.setBurndownEntries(entries);
     });
   }
+
+  uploadCsvForImport(formData){
+    console.log('uploading');
+    return this.http.post(`${this.apiUrl}imports/uploadcsv`, formData).toPromise();
+  }
 }

@@ -77,6 +77,12 @@ const routes: Routes = [
     loadChildren: './pages/about/about.module#AboutPageModule',
     canActivate: [AuthGuard]
   },
+  {
+    path: 'import',
+    loadChildren: './pages/import/import.module#ImportPageModule',
+    canActivate: [AuthGuard]
+  },
+
 
 ];
 
