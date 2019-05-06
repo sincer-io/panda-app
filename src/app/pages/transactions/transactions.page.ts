@@ -80,6 +80,17 @@ export class TransactionsPage implements OnInit {
           handler: () => {
             this.apiSvc.deleteTransaction(transactionId).then(() => {
               this.dataSvc.removeTransaction(transactionId);
+              for (const group in this.groupedTransactions) {
+                if (this.groupedTransactions.hasOwnProperty(group)) {
+                  if(this.groupedTransactions[group].transactions.findIndex(t => t.id == transactionId) !== -1){
+                    this.groupedTransactions[group].transactions = this.groupedTransactions[group].transactions.filter(t => t.id !== transactionId);
+                    // if(this.groupedTransactions[group].transactions.length <= 0){
+                    //   delete this.groupedTransactions[group];
+                    // }
+                    break;
+                  }
+                }
+              }
             }).catch(err => {
               console.log(err);
             })
@@ -87,7 +98,6 @@ export class TransactionsPage implements OnInit {
         }
       ]
     }).then(confirm => confirm.present());
-
   }
 
 }

@@ -34,8 +34,7 @@
     </ng-container>
   </ion-list>
   
-  <!-- (ionInfinite)="loadData($event)" -->
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="paginate($event)" >
+  <ion-infinite-scroll threshold="250px" (ionInfinite)="paginate($event)" >
     <ion-infinite-scroll-content
       loadingSpinner="crescent"
       loadingText="Loading">

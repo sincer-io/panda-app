@@ -48,7 +48,7 @@ export class ApiService {
     return this.http.put<Transaction>(`${this.apiUrl}transactions`, transaction).toPromise();
   }
 
-  getTransactions(page: number = 1, per_page: number = 15): Promise<PaginatedContent<Transaction>> {
+  getTransactions(page: number = 1, per_page: number = 30): Promise<PaginatedContent<Transaction>> {
     let params = [`page=${page}`, `perPage=${per_page}`]
     return new Promise<PaginatedContent<Transaction>>((resolve, reject) => {
       this.http.get<PaginatedContent<Transaction>>(`${this.apiUrl}transactions?${params.join('&')}`).subscribe(transactions => {
