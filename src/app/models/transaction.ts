@@ -2,6 +2,8 @@ import { Category } from './category';
 import { Tag } from './tag';
 import { Location } from './location';
 import { Person } from './person';
+import { TransactionTag } from './transaction-tag';
+import { TransactionPerson } from './transaction-person';
 
 export class Transaction {
     id: number;
@@ -13,7 +15,7 @@ export class Transaction {
     category: Category;
     location: Location;
     tags: Tag[];
+    transactionTags: TransactionTag[];
     people: Person[];
-    createdAt: string;
-    updatedAt: string;
+    transactionPeople: TransactionPerson[];
 }

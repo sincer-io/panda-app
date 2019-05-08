@@ -74,6 +74,8 @@ export class TransactionPage implements OnInit {
           let transaction = transactions.items.find(x => x.id == params['id']);
           if (transaction !== undefined) {
             this.transaction = JSON.parse(JSON.stringify(transaction));
+            this.transaction.tags = this.transaction.transactionTags.map(x => x.tag);
+            this.transaction.people = this.transaction.transactionPeople.map(x => x.person);
             this.transaction.amount = this.transaction.amount < 0 ? -this.transaction.amount : this.transaction.amount;
           }
         });
